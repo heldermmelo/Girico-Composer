@@ -41,7 +41,7 @@ function scene:show( event )
   if (phase == "did") then 
 	local function updateScore()
      print(score.height)  
-     score.height = score.height - 50
+     score.height = score.height - 5
 	   
 end
 --nada - teste
@@ -287,6 +287,8 @@ function damageCharacter(damageTaken)
 	currentHealth = currentHealth - damageTaken
 	updateDamageBar()
 end
+
+
  function gameOvo( )
  	
 	if(score.height ==0 or currentHealth <=0)
@@ -299,9 +301,9 @@ end
 	faceover.alpha = 1
  	gameIsActive = false  
  	physics.pause()
-	--timer.cancel(z)
-	--timer.cancel(i)
-	--timer.cancel(f)
+	timer.cancel(z)
+	timer.cancel(i)
+	timer.cancel(f)
 	left:removeEventListener( "touch", left )
     right:removeEventListener( "touch", right )
     Runtime:removeEventListener("enterFrame", moveCarro)
@@ -326,10 +328,54 @@ end
 	
 	
 	
-	composer.gotoScene( "gameOvo" )
+	--composer.gotoScene( "gameOvo" )
  	end
+	local function vitoria()
+  if (pontuacao >= 25) then 
+	scrollSpeed=0
+	gameIsActive = false  
+ 	physics.pause()
+	timer.cancel(z)
+	timer.cancel(i)
+	timer.cancel(f)
+	timer.cancel(scoreTimer)
+	left:removeEventListener( "touch", left )
+    right:removeEventListener( "touch", right )
+    Runtime:removeEventListener("enterFrame", moveCarro)
+	Runtime:removeEventListener("enterFrame", move)
+	Runtime:removeEventListener("touch", stop )
+	Runtime:removeEventListener('enterFrame', gameOvo)
+    Runtime:removeEventListener("collision", onCollision) 
+	display.newImageRect("FinalBom.png", 460, 480)
+	audio.stop(backgroundMusicChannel)
+	else
+	scrollSpeed=0
+	gameIsActive = false  
+ 	physics.pause()
+	timer.cancel(z)
+	timer.cancel(i)
+	timer.cancel(f)
+	timer.cancel(scoreTimer)
+	left:removeEventListener( "touch", left )
+    right:removeEventListener( "touch", right )
+    Runtime:removeEventListener("enterFrame", moveCarro)
+	Runtime:removeEventListener("enterFrame", move)
+	Runtime:removeEventListener("touch", stop )
+	Runtime:removeEventListener('enterFrame', gameOvo)
+    Runtime:removeEventListener("collision", onCollision) 
+	display.newImageRect("FinalRuim.png", 460, 480)
+	audio.stop(backgroundMusicChannel)
+	end
+end
+	
+
+local function transitionFinished()
+  print("Fim do jogo, vitória!")
+  end
+  timer.performWithDelay(3000,vitoria,1)
 	end
 	
+	timer.performWithDelay(3000,vitoria,1)
 	scoreTimer = timer.performWithDelay(1000, updateScore, 0)
 	left:addEventListener("touch",left)
 	right:addEventListener("touch",right)
