@@ -160,7 +160,7 @@ damageBar:setFillColor( 255/255, 0/255, 0/255 )
 
 -- Adiciona botão esquerdo
  local left = display.newImage ("btn_arrow.jpg")
- left.x = 45; left.y = 430;
+ left.x = 45; left.y = 560;
  left:scale(0.4,0.4)
  left.rotation = 180;
 
@@ -169,7 +169,7 @@ damageBar:setFillColor( 255/255, 0/255, 0/255 )
 
 -- Adiciona botão direito
  local right = display.newImage ("btn_arrow.jpg")
- right.x = 290; right.y = 430;
+ right.x = 390; right.y = 560;
  right:scale(0.4, 0.4)
 
 
@@ -346,7 +346,7 @@ end
 	Runtime:removeEventListener("touch", stop )
 	Runtime:removeEventListener('enterFrame', gameOvo)
     Runtime:removeEventListener("collision", onCollision) 
-	display.newImageRect("FinalBom.png", 460, 480)
+	display.newImage("FinalBom.png", 460, 480)
 	audio.stop(backgroundMusicChannel)
 	else
 	scrollSpeed=0
@@ -363,7 +363,9 @@ end
 	Runtime:removeEventListener("touch", stop )
 	Runtime:removeEventListener('enterFrame', gameOvo)
     Runtime:removeEventListener("collision", onCollision) 
-	display.newImageRect("FinalRuim.png", 460, 480)
+	finalRuim=display.newImage("FinalRuim.png", 300, 3178)
+	--finalRuim: translate(0, 0)
+	--finalRuim: scale(0.7, 0)
 	audio.stop(backgroundMusicChannel)
 	end
 end
@@ -372,10 +374,10 @@ end
 local function transitionFinished()
   print("Fim do jogo, vitória!")
   end
-  timer.performWithDelay(3000,vitoria,1)
+  timer.performWithDelay(300000,vitoria,1)
 	end
 	
-	timer.performWithDelay(3000,vitoria,1)
+	timer.performWithDelay(300000,vitoria,1)
 	scoreTimer = timer.performWithDelay(1000, updateScore, 0)
 	left:addEventListener("touch",left)
 	right:addEventListener("touch",right)
